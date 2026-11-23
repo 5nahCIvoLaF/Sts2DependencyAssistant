@@ -1,8 +1,8 @@
 {
   "title": "前置检查助手 / Dependency Assistant",
-  "description": "检查已启用 mod 的前置是否齐全，并在游戏内一键下载缺失项。\n\n功能：\n- 递归检查所有已启用 mod 的依赖，区分未安装 / 已禁用 / 版本过低 / 加载失败 / 需重启\n- 补足游戏 manifest 未声明、但工坊页面标注为必需的前置（如 SpeedX 依赖 ModConfig）\n- 一键通过 Steam 订阅并下载缺失前置，带实时进度条\n- 主界面右下角随时打开；启动时仅在检出问题时提示\n- 点击窗口外或按 ESC 关闭\n\n本 mod 无任何前置依赖，可独立运行。\n\n游戏版本要求：0.113.1 及以上。",
+  "description": "[h1]前置检查助手 / Dependency Assistant[/h1]\n检查已启用 mod 的前置是否齐全，并在游戏内一键下载缺失项。\n\n[h2]功能[/h2]\n[list]\n[*]递归检查所有已启用 mod 的依赖，区分 [b]未安装 / 已禁用 / 版本过低 / 加载失败 / 需重启[/b]\n[*]补足游戏 manifest 未声明、但工坊页面标注为必需的前置（例如 SpeedX 依赖 ModConfig）\n[*]一键通过 Steam 订阅并下载缺失前置，带实时下载进度条\n[*]主界面右下角随时打开；启动时仅在检出问题时提示，无问题静默\n[*]点击窗口外任意区域或按 [b]ESC[/b] 关闭\n[/list]\n\n[h2]说明[/h2]\n本 mod [b]无任何前置依赖[/b]，可独立运行。\n游戏版本要求：[b]0.113.1[/b] 及以上。\n\n[h2]反馈 / Feedback[/h2]\n遇到问题、发现漏检的前置、或有功能建议，欢迎提交 Issue。\n请附上 [code]godot.log[/code]（位于 [code]%appdata%\\SlayTheSpire2\\logs[/code]），否则难以定位问题。\n\nFound a bug or a missed dependency? Please open an issue with your [code]godot.log[/code] attached.\n\n[hr][/hr]\n[url=https://github.com/5nahCIvoLaF/Sts2DependencyAssistant/issues][b]GitHub Issues[/b][/url]\n[url=https://github.com/5nahCIvoLaF/Sts2DependencyAssistant]源码 / Source[/url]",
   "visibility": "public",
-  "changeNote": "首次发布：依赖检查、状态分类、一键下载、进度条。",
+  "changeNote": "描述改为工坊 BBCode 格式，补充反馈渠道与 Issue 链接。",
   "tags": [
     "Tools & APIs",
     "QoL",

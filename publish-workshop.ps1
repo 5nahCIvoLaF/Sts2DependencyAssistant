@@ -46,15 +46,25 @@ if (-not $steam) {
 Write-Host "Uploading... Steam must be running and the account must own Slay the Spire 2."
 & $uploader upload -w $Workspace
 $code = $LASTEXITCODE
+if ($null -eq $code) { $code = 0 }
 
-if ($code -eq 0) {
-    $idFile = Join-Path $Workspace 'mod_id.txt'
-    if (Test-Path -LiteralPath $idFile) {
-        Write-Host ("Workshop item ID: " + (Get-Content -LiteralPath $idFile -Raw).Trim())
-    }
-    Write-Host "Upload finished."
-} else {
-    Write-Host "Upload failed with exit code $code. See mod-uploader.log for details."
+# Treat a present workshop item ID as success: the uploader sometimes
+# returns a non-zero code after a successful upload.
+$idFile = Join-Path $Workspace 'mod_id.txt'
+$id = ""
+if (Test-Path -LiteralPath $idFile) {
+    $id = (Get-Content -LiteralPath $idFile -Raw).Trim()
 }
 
-exit $code
+if ($id -ne "") {
+    Write-Host "Upload finished."
+    Write-Host "Workshop item ID: $id"
+    Write-Host "Page: https://steamcommunity.com/sharedfiles/filedetails/?id=$id"
+    if ($code -ne 0) {
+        Write-Host "Note: uploader returned $code but the item ID is present - treat as success, verify on the page."
+    }
+    exit 0
+}
+
+Write-Host "Upload failed (uploader exit $code). See mod-uploader.log for details."
+exit 1

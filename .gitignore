@@ -1,0 +1,18 @@
+# Build output
+src/bin/
+src/obj/
+src/.godot/
+*.user
+*.suo
+
+# Local paths
+local.props
+Directory.Build.props
+
+# Workshop uploader workspace (contains credentials/ids per machine)
+workshop/mod_id.txt
+workshop/*.log
+
+# OS
+Thumbs.db
+.DS_Store

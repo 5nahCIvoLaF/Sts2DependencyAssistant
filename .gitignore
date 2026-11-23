@@ -16,6 +16,9 @@ workshop/*.log
 # Release packages
 *.zip
 
+# Official uploader binaries (download via tools/README)
+tools/
+
 # OS
 Thumbs.db
 .DS_Store

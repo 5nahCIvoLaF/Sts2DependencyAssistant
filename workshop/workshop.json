@@ -2,6 +2,7 @@
   "title": "前置检查助手 / Dependency Assistant",
   "description": "检查已启用 mod 的前置是否齐全，并在游戏内一键下载缺失项。\n\n功能：\n- 递归检查所有已启用 mod 的依赖，区分未安装 / 已禁用 / 版本过低 / 加载失败 / 需重启\n- 补足游戏 manifest 未声明、但工坊页面标注为必需的前置（如 SpeedX 依赖 ModConfig）\n- 一键通过 Steam 订阅并下载缺失前置，带实时进度条\n- 主界面右下角随时打开；启动时仅在检出问题时提示\n- 点击窗口外或按 ESC 关闭\n\n本 mod 无任何前置依赖，可独立运行。\n\n游戏版本要求：0.113.1 及以上。",
   "visibility": "public",
+  "changeNote": "首次发布：依赖检查、状态分类、一键下载、进度条。",
   "tags": [
     "Tools & APIs",
     "QoL",
@@ -9,5 +10,5 @@
     "English"
   ],
   "dependencies": [],
-  "changeNote": "首次发布：依赖检查、状态分类、一键下载、进度条。"
+  "contentDescriptors": []
 }

@@ -48,12 +48,39 @@ dotnet build -p:SteamLibraryPath="<你的 steamapps 路径>"
 
 ## 发布创意工坊
 
-使用 Mega Crit 官方的 [sts2-mod-uploader](https://github.com/megacrit/sts2-mod-uploader)：
+使用 Mega Crit 官方的 [sts2-mod-uploader](https://github.com/megacrit/sts2-mod-uploader)。
 
-1. 解压 `workshop/` 内容到上传器同级的自定义工作区目录
-2. 把 `dist/Sts2DependencyAssistant/` 里的 dll 与 json 放进工作区的 `content/`
-3. 回填 `workshop.json`（首次上传后从 `mod_id.txt` 取得工坊 ID）
-4. 运行 `ModUploader.exe upload -w <工作区目录>`
+本仓库已下载官方 v0.2.0 到 `tools/`（该目录不入库，克隆后需自行下载）：
+
+```
+tools/
+  ModUploader.exe       官方上传器
+  steam_api64.dll
+  steam_appid.txt
+  template/             官方工作区模板
+```
+
+`workshop/` 已按官方结构准备好：
+
+```
+workshop/
+  workshop.json         标题/描述/可见性/tags/dependencies
+  content/              Sts2DependencyAssistant.dll + .json
+  image.png             封面图（<1MB）
+```
+
+上传（需 Steam 已登录且拥有游戏）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\publish-workshop.ps1
+```
+
+脚本会校验工作区、检查封面大小与 Steam 进程，然后执行
+`ModUploader.exe upload -w workshop`。首次上传成功后 `workshop/mod_id.txt`
+会记录工坊项目 ID（已加入 `.gitignore`），后续更新复用同一 ID。
+
+更新版本时：用新构建覆盖 `workshop/content/`，改 `workshop.json` 的
+`changeNote`，再次运行脚本即可。
 
 ## 源码结构
 

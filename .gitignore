@@ -13,6 +13,9 @@ Directory.Build.props
 workshop/mod_id.txt
 workshop/*.log
 
+# Release packages
+*.zip
+
 # OS
 Thumbs.db
 .DS_Store

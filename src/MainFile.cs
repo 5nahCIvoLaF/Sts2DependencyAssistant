@@ -3,6 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Screens.MainMenu;
+using MegaCrit.Sts2.Core.Nodes.Screens.ScreenContext;
 
 namespace Sts2DependencyAssistant;
 
@@ -42,6 +43,34 @@ internal static class MainMenuReadyPatch
         CheckRunner.ScheduleStartupCheck();
     }
 
+    /// <summary>
+    /// 把按钮可见性绑定到「主菜单是否为当前活动屏幕」。
+    /// 角色选择、图鉴等界面打开时主菜单通常不销毁、也不隐藏，
+    /// 只有 ActiveScreenContext 能反映真实的当前界面。
+    /// </summary>
+    private static void BindVisibility(NMainMenu instance, Button button)
+    {
+        var context = ActiveScreenContext.Instance;
+
+        void Sync()
+        {
+            if (!GodotObject.IsInstanceValid(button) || !GodotObject.IsInstanceValid(instance))
+            {
+                return;
+            }
+            button.Visible = context.IsCurrent(instance);
+        }
+
+        context.Updated += Sync;
+        Sync();
+
+        // 节点销毁时解除订阅，避免持有已释放节点
+        button.TreeExiting += () =>
+        {
+            context.Updated -= Sync;
+        };
+    }
+
     private static void InjectButton(NMainMenu instance)
     {
         try
@@ -64,9 +93,14 @@ internal static class MainMenuReadyPatch
             button.OffsetRight = -40;
             button.OffsetBottom = -150;
 
-            // 挂到主菜单根节点，随主菜单显示/隐藏
+            // 挂到主菜单根节点
             instance.AddChild(button);
             button.Pressed += CheckRunner.OpenWindow;
+
+            // 只在主菜单是当前活动界面时显示。
+            // 进入角色选择等界面时主菜单节点仍留在树里且可见，
+            // 单靠父节点可见性无法隐藏，必须用游戏的屏幕上下文判断。
+            BindVisibility(instance, button);
 
             PluginLog.Info("浮动前置检查按钮已注入（右下角）");
         }

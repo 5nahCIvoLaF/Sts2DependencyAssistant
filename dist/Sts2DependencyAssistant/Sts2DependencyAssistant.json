@@ -3,7 +3,7 @@
   "name": "前置检查助手",
   "author": "qyyyy",
   "description": "自动检查已启用 mod 的前置依赖，在游戏内窗口显示缺失/禁用/版本过低状态，并支持静默订阅下载缺失的创意工坊前置。\n\n主菜单右下角可打开检查窗口；启动时若发现缺失前置也会自动提示。\n\n本 mod 无硬性前置，可独立运行。若已安装 AutoModSubscriber，会自动借用它提升工坊订阅体验；未安装时仍能通过 Steam 原生接口订阅。",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "has_pck": false,
   "has_dll": true,
   "min_game_version": "0.113.1",
